@@ -20,7 +20,7 @@
 
 <% @user.tweets.each do |tweet| %>
 	<div class="row">
-		<p><%= tweet.message %></p>
+		<p><%= tweet.message.html_safe %></p>
 		<p><%= 	time_ago_in_words(tweet.created_at) %></p>
 	</div>
 <% end %>	

@@ -11,7 +11,7 @@
 	  
 	  <div class="card-body">
 	    <h5 class="card-title"><%= image_tag tweet.user.avatar.thumb %> ~ about <%= time_ago_in_words(tweet.created_at) %> ago, <%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> said...</h5>
-	    <p class="card-text"><%= tweet.message %></p>
+	    <p class="card-text"><%= tweet.message.html_safe %></p>
 	  </div>
 	</div>
 <% end %>
