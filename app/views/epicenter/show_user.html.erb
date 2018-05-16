@@ -1,0 +1,26 @@
+<h1>@<%= @user.username %>'s User Profile</h1>
+
+
+<p><%= image_tag @user.avatar.show %></p>
+<p><%= @user.name %></p>
+<p><%= @user.bio %></p>
+<p><%= @user.location %></p>
+
+
+<% unless current_user.id == @user.id %>
+	<% if current_user.following.include?(@user.id) %>
+		<%= link_to "Unfollow", unfollow_path(id: @user.id), class: 'btn btn-danger' %>
+	<% else %>
+		<%= link_to "Follow", now_following_path(id: @user.id), class: 'btn btn-primary' %>
+	<% end %>
+<% else %>
+		<%= render 'epicenter/newtweet' %>
+<% end %>
+
+
+<% @user.tweets.each do |tweet| %>
+	<div class="row">
+		<p><%= tweet.message %></p>
+		<p><%= 	time_ago_in_words(tweet.created_at) %></p>
+	</div>
+<% end %>	

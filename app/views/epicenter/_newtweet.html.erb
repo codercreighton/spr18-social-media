@@ -1,0 +1,5 @@
+<%= form_for @tweet, url: {action: "epi_tweet"} do |f|%>
+	<%= f.text_field :message, placeholder: "Got something to say?", class: 'form-control' %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.submit "Tweet it!", class: 'btn btn-primary' %>	
+<% end %>	
