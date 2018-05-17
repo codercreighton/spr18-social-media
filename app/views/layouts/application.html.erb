@@ -13,40 +13,61 @@
   	<%= render 'layouts/navbar' %>
 		<!-- end of navbar -->
 
-	<div class="row">	
-		<div class="col-lg-3 left-panel">
-			<% if user_signed_in? %>
-			<!-- display profile pic and current user stats -->
-				<!-- <div class="card" style="width: 18rem;">
-				  <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>
- -->
-			<% else %>
-				<center>
-					Welcome to Word on the Street!  Login so you can be a part of the conversation!
-				</center>
-			<% end %>
-		</div>	
 
-		<div class="col-lg-6 center-panel">
-	  	<div class="container">
-		    <%= yield %>
-		  </div> 
-		</div>
 
-		<div class="col-lg-3 right-panel">
-			<% if user_signed_in? %>
-			<!-- display top trends -->
-			<% else %>
-			<%= image_tag "thoughtballons.jpg", class: 'login-pic' %>
-			<% end %>
-		</div>
-</div>
+
+
+<!-- new layout -->
+<% if user_signed_in? %>
+<center>
+<div class="container container-margin">
+
+      <div class="row" >
+   
+        <div class="col-md-3 left-panel">
+          
+          
+          <!-- This side of the page will contain current_user profile information which will appear on every page -->
+            <center>
+              <p><%= image_tag current_user.avatar.show, class: "img-circle" %></p>
+              <h4>You are currently logged in as: </h4>
+              <p><strong><%= link_to current_user.name, show_user_path(id: current_user.id) %></strong> @<%= current_user.username %></p>
+              <p>Location: <strong><%= current_user.location %></strong></p>
+              <p>Following: <%= link_to current_user.following.length, following_path(id: current_user.id) %>  Followers: <%= link_to total_followers, followers_path(id: current_user.id) %></p>
+            </center>
+    
+        
+
+        </div>
+       <div class="col-lg-6 center-panel">
+          
+            <%= yield %>
+         
+         </div> 
+        <div class="col-md-3 right-panel"> 
+         
+           <h3>What's Trending!</h3>
+           <% hot_tags.each do |tag| %>
+              <%= link_to tag.phrase, tag_tweets_path(id: tag.id) %>
+            <% end %>
+
+            <h3>Hottest Tweeter:</h3>
+            <p><%= image_tag top_tweeter.avatar.url, class: "user-pic" %></p>
+            <p><%= link_to "@#{top_tweeter.username}", show_user_path(id: top_tweeter.id) %> with <%= top_number_tweets %> tweets!</p>
+         
+        </div>
+
+      </div>
+          <% else %>
+          <div class="container">
+
+            <%= yield %>
+          </div>
+          <% end %> 
+        </div>
+    </div> 
+</center>
+<!-- end of new layout -->
 
   </body>
 </html>

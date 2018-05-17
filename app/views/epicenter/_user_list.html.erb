@@ -1,0 +1,28 @@
+
+<div class="row">
+	<% @users.each do |user| %>
+
+		<div class="card card-users" style="width: 15rem;">
+		  <p><%= image_tag user.avatar.url, class: 'user-pic' %></p>
+		  <div class="card-body">
+		    <h5 class="card-title"><%= link_to user.username, show_user_path(id: user.id) %></h5>
+		    <p class="card-text">
+		    	<p><strong>Name:</strong></p> 
+		    	<p><%= user.name %></p> 
+		    	<p><strong>Location:</strong></p> 
+		    	<p><%= user.location %></p>
+		    	<p><%= link_to "Following", following_path(id: user.id) %></p>
+		    	<p><%= link_to "Followers", followers_path(id: user.id) %></p>
+		    </p>
+		    <% if current_user.following.include?(user.id) %>
+		      <%= link_to "Following", unfollow_path(id: user.id), class: "btn btn-primary unfollow-btn" %>
+		    <% else %>
+		      <% if current_user.id != user.id %>
+		        <%= link_to "Follow", now_following_path(id: user.id), class: "btn btn-primary" %>
+		      <% end %>
+		    <% end %>
+		  </div>
+		</div>
+	<% end %>
+
+</div>

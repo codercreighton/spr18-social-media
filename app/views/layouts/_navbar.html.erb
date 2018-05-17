@@ -1,23 +1,35 @@
-<ul class="nav nav-pills ">
-		  <% if user_signed_in? %>
-		  <li class="nav-item">
-		    <%= link_to 'Your Feed Page', root_path, class: 'nav-link' %>
-		  </li>
 
-		  	<li class="nav-item dropdown">
-			    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome @<%= current_user.username %></a>
-			    <div class="dropdown-menu">
-			      <p><%= link_to 'Edit Profile', edit_user_registration_path %><p>
-			     	<p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
-			    </div>
-			  </li>
-		
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+       <% if user_signed_in? %>
+	  <li class="nav-item">
+	    <%= link_to 'Your Feed Page', root_path, class: 'nav-link' %>
+	  </li>
 
-		  <li class="nav-item">
-		    <p> <%= link_to 'Tweet Something', new_tweet_path, class: 'nav-link' %></p>
+	  	<li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome @<%= current_user.username %></a>
+		    <div class="dropdown-menu">
+		      <p><%= link_to 'Edit Profile', edit_user_registration_path %></p>
+		     	<p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+		    </div>
 		  </li>
-		  <li class="nav-item">
-		    <p> <%= link_to 'All Tweets', tweets_path, class: 'nav-link' %></p>
-		  </li>	
-		 <% end %>  
-		</ul>
+	
+
+	  <li class="nav-item">
+	    <p> <%= link_to 'Tweet Something', new_tweet_path, class: 'nav-link' %></p>
+	  </li>
+	  <li class="nav-item">
+	    <p> <%= link_to 'All Tweets', tweets_path, class: 'nav-link' %></p>
+	  </li>	
+	  <li class="nav-item">
+	    <p> <%= link_to 'All Users', all_users_path, class: 'nav-link' %></p>
+	  </li>	
+	 <% end %>  
+    </ul>
+  </div>
+</nav>

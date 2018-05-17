@@ -22,21 +22,25 @@ class Tweet < ApplicationRecord
 	  
 	    if check == true
 	    	arr = self.message.split
-	    	index = arr.map{ |x| x.include? "http"}.index(true)
+	    	index = arr.map{|x| x.include?("http://") || x.include?("https://") || x.include?("www.")}.index(true)
 	      self.link = arr[index]
 
+				if arr[index].include? "http"
+					self.link = arr[index]
+				else	
+					self.link = "http://#{arr[index]}"
+				end	
 
-	      puts "----------------"
-	      puts arr[index]
-	      puts "-----------------"
 
 	      if arr[index].length > 23
 	  	    arr[index] = "#{arr[index][0..20]}..."	
-	      end
+	  	  end
 	  				
 	      self.message = arr.join(" ")
 	    end
 	  end	
+
+
 
 	  def apply_link
 	  	arr = self.message.split

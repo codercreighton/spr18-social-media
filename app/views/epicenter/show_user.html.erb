@@ -1,15 +1,18 @@
-<h1>@<%= @user.username %>'s User Profile</h1>
+<h3>@<%= @user.username %>'s User Profile</h3>
 
 
 <p><%= image_tag @user.avatar.show %></p>
-<p><%= @user.name %></p>
-<p><%= @user.bio %></p>
-<p><%= @user.location %></p>
+<h5>Meet <%= @user.name %></h5>
+<p>Bio: <%= @user.bio %></p>
+<p>From: <%= @user.location %></p>
+
+<p><%= link_to "Following", following_path(id: @user.id) %></p>
+<p><%= link_to "Followers", followers_path(id: @user.id) %></p>
 
 
 <% unless current_user.id == @user.id %>
 	<% if current_user.following.include?(@user.id) %>
-		<%= link_to "Unfollow", unfollow_path(id: @user.id), class: 'btn btn-danger' %>
+		<%= link_to "Following", unfollow_path(id: @user.id), class: 'btn btn-primary unfollow-btn' %>
 	<% else %>
 		<%= link_to "Follow", now_following_path(id: @user.id), class: 'btn btn-primary' %>
 	<% end %>
@@ -18,9 +21,13 @@
 <% end %>
 
 
-<% @user.tweets.each do |tweet| %>
-	<div class="row">
-		<p><%= tweet.message.html_safe %></p>
-		<p><%= 	time_ago_in_words(tweet.created_at) %></p>
+<% @user.tweets.order(created_at: :desc).each do |tweet| %>
+	
+	<div class="card">
+	  
+	  <div class="card-body">
+	    <h6 class="card-title"><%= image_tag tweet.user.avatar.thumb %> ~ about <%= time_ago_in_words(tweet.created_at) %> ago, <%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> said...</h6>
+	    <p class="card-text"><%= tweet.message.html_safe %></p>
+	  </div>
 	</div>
-<% end %>	
+<% end %>

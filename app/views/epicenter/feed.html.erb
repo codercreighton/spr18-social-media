@@ -1,5 +1,5 @@
-<h1>@<%= current_user.username  %>'s Feed</h1>
-<h3>See what your "friends" are saying about you!</h3>
+<h3>@<%= current_user.username  %>'s Feed</h3>
+<h5>See what your "friends" are saying about you!</h5>
 
 	<%= render 'epicenter/newtweet' %>
 
@@ -7,10 +7,10 @@
 
 <% @following_tweets.each do |tweet| %>
 	
-	<div class="card">
+	<div class="card ">
 	  
 	  <div class="card-body">
-	    <h5 class="card-title"><%= image_tag tweet.user.avatar.thumb %> ~ about <%= time_ago_in_words(tweet.created_at) %> ago, <%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> said...</h5>
+	    <h6 class="card-title"><%= image_tag tweet.user.avatar.thumb %> <%= link_to tweet.user.name, show_user_path(id: tweet.user_id) %>  @<%= tweet.user.username %> • <%= time_ago_in_words(tweet.created_at) if Time.now - tweet.created_at < 86400 %> <%= tweet.created_at.strftime('%b%e') if Time.now - tweet.created_at > 86400 %> </h6>
 	    <p class="card-text"><%= tweet.message.html_safe %></p>
 	  </div>
 	</div>

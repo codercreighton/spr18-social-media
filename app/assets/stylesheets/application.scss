@@ -23,3 +23,82 @@
 	height: 300px;
 	width: auto;
 }
+
+img{
+	border-radius: 100px;
+}
+body{
+	background-color: #c7ccd0;
+}
+
+.left-panel, .center-panel, .right-panel{
+	background-color: #edeef1;
+
+	border: 5px solid #c7ccd0;
+	border-radius: 10px;
+	padding: 25px 10px 10px 10px;
+
+}
+
+.login{
+	padding: 50px 0px 0px 30px;
+	background-color: #ffffff;
+	margin-top: 60px;
+	border-radius: 10px;
+
+}
+
+a.nav-link {
+	color: white;
+}
+
+ .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #6794c4;
+}
+
+.dropdown-menu {
+    text-align: center;
+    list-style: none;
+    background-color: #343a40;
+  }
+
+.dropdown-menu a{
+	color: white;
+}
+.navbar {
+	background-color: #566067;
+
+}
+
+.btn-primary{
+	background-color: #566067;
+	border-color: #566067;
+}
+.card {
+	text-align: left;
+}
+
+/*.btn-div-color{
+	background-color: #566067;
+	position: fixed;
+	height: 40px;
+	width: 100%;
+}*/
+.container-margin{
+	margin-top: 70px;
+}
+
+.container-users{
+	margin: 15px;
+	padding: 30px;
+}
+
+.card-users {
+	text-align: center;
+	padding-top: 10px;
+}
+.user-pic{
+	height: 100px;
+	width: 100px;
+}
